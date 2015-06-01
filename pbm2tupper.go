@@ -49,5 +49,7 @@ func main() {
 				calculate_tupper(value)
 			}
 		}
+	} else {
+		println("Usage: pbm2tupper [FILE...]")
 	}
 }
