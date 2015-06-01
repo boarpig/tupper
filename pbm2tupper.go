@@ -12,8 +12,8 @@ func main() {
 		panic(err)
 	}
 	imgfile, str, err := image.Decode(file)
-	bound := imgfile.Bounds()
 	if str == "pbm" {
+		bound := imgfile.Bounds()
 		if bound.Max.X == 106 && bound.Max.Y == 17 {
 			for y := 0; y < 17; y = y + 1 {
 				for x := 0; x < 106; x = x + 1 {
