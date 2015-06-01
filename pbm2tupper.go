@@ -39,9 +39,15 @@ func calculate_tupper(imgfile string) {
 		os.Exit(2)
 	}
 	tupper.Mul(tupper, big.NewInt(17))
-	println(tupper.String())
+	println(imgfile, tupper.String())
 }
 
 func main() {
-	calculate_tupper("testi.pbm")
+	if len(os.Args) > 1 {
+		for key, value := range os.Args {
+			if key > 0 {
+				calculate_tupper(value)
+			}
+		}
+	}
 }
