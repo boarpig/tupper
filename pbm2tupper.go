@@ -7,20 +7,21 @@ import (
 	"math/big"
 )
 
-func main() {
-	file, err := os.Open("testi.pbm")
+func calculate_tupper(imgfile string) {
+	file, err := os.Open(imgfile)
 	if err != nil {
-		panic(err)
+		println("Image file doesn't exist.")
+		os.Exit(3)
 	}
-	imgfile, str, err := image.Decode(file)
+	tupper_img, str, err := image.Decode(file)
 	tupper := big.NewInt(0)
 	if str == "pbm" {
-		bound := imgfile.Bounds()
+		bound := tupper_img.Bounds()
 		position := 1802
 		if bound.Max.X == 106 && bound.Max.Y == 17 {
 			for x := 0; x < 106; x = x + 1 {
 				for y := 16; y >= 0; y = y - 1 {
-					b, _, _, _ := imgfile.At(x, y).RGBA()
+					b, _, _, _ := tupper_img.At(x, y).RGBA()
 					position--
 					if b == 0 {
 						tupper.SetBit(tupper, position, 1)
@@ -39,4 +40,8 @@ func main() {
 	}
 	tupper.Mul(tupper, big.NewInt(17))
 	println(tupper.String())
+}
+
+func main() {
+	calculate_tupper("testi.pbm")
 }
